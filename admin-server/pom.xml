@@ -14,15 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.github.foodbox_project</groupId>
-            <artifactId>model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.foodbox_project</groupId>
             <artifactId>dal</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.foodbox_project</groupId>
-            <artifactId>service</artifactId>
         </dependency>
     </dependencies>
 
