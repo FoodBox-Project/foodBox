@@ -56,13 +56,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_CREDS"/>
             </column>
-            <column name="user_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
             <column name="password" type="VARCHAR2(120)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="phone_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -72,12 +66,79 @@
     </changeSet>
 
     <changeSet id="2019-12-02 13:32" author="Anton Alekseev">
-
-        <addForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" baseColumnNames="user_id"
+        <addForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" baseColumnNames="id"
                                  constraintName="fk_user_creds" referencedTableName="users"
                                  referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
         <rollback>
             <dropForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-02 17:11" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="phones" schemaName="foodbox"/>
+            </not>
+        </preConditions>
+        <createTable tableName="phones" schemaName="foodbox">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PHONES"/>
+            </column>
+            <column name="phone_number" type="VARCHAR2(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="country_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_confirmed" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="phones" schemaName="foodbox"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-02 17:31" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="phones" baseTableSchemaName="foodbox" baseColumnNames="id"
+                                 constraintName="fk_users_phones" referencedTableName="user_creds"
+                                 referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="phones" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-02 17:36" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="emails" schemaName="foodbox"/>
+            </not>
+        </preConditions>
+        <createTable tableName="emails" schemaName="foodbox">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_EMAILS"/>
+            </column>
+            <column name="email" type="VARCHAR2(120)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="is_subscribed" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_confirmed" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="emails" schemaName="foodbox"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-02 17:37" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="emails" baseTableSchemaName="foodbox" baseColumnNames="id"
+                                 constraintName="fk_users_emails" referencedTableName="users"
+                                 referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="emails" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>
