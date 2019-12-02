@@ -4,8 +4,80 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="2019-12-02 00:31" author="Anton Alekseev">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="false">
+                SELECT exists
+                (SELECT schema_name
+                 FROM information_schema.schemata
+                 WHERE schema_name = 'foodbox');
+            </sqlCheck>
+        </preConditions>
         <sql dbms="postgresql" endDelimiter=";">
             CREATE SCHEMA foodbox
         </sql>
+    </changeSet>
+    
+    <changeSet id="2019-12-02 12:14" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="users" schemaName="foodbox"/>
+            </not>
+        </preConditions>
+        <createTable tableName="users" schemaName="foodbox">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USERS"/>
+            </column>
+            <column name="first_name" type="VARCHAR2(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR2(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_role" type="VARCHAR2(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthday" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photo_url" type="VARCHAR2(256)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="users" schemaName="foodbox"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-02 13:15" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="user_creds" schemaName="foodbox"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_creds" schemaName="foodbox">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_CREDS"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR2(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="user_creds" schemaName="foodbox"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-02 13:32" author="Anton Alekseev">
+
+        <addForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" baseColumnNames="user_id"
+                                 constraintName="fk_user_creds" referencedTableName="users"
+                                 referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
+        </rollback>
     </changeSet>
 </databaseChangeLog>
