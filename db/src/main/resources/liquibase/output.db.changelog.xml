@@ -1,0 +1,671 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="user (generated)" id="1577370886411-1">
+        <createTable tableName="chat">
+            <column autoIncrement="true" name="chat_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="chat_topic" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-2">
+        <createTable tableName="city">
+            <column autoIncrement="true" name="city_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="country_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-3">
+        <createTable tableName="code_purpose">
+            <column autoIncrement="true" name="purpose_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="purpose_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-4">
+        <createTable tableName="confirmation_code">
+            <column autoIncrement="true" name="code_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code_purpose" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sent_to" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-5">
+        <createTable tableName="country">
+            <column autoIncrement="true" name="country_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="country_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_abbreviation" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_phone_code" type="VARCHAR(45)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-6">
+        <createTable tableName="day_of_week">
+            <column autoIncrement="true" name="day_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="day_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-7">
+        <createTable tableName="dimension">
+            <column autoIncrement="true" name="dimension_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-8">
+        <createTable tableName="document">
+            <column autoIncrement="true" name="document_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-9">
+        <createTable tableName="hours_exceptions">
+            <column name="hours_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="exception_day" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exception_opens" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exception_closes" type="time">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-10">
+        <createTable tableName="item">
+            <column autoIncrement="true" name="item_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-11">
+        <createTable tableName="item_category">
+            <column autoIncrement="true" name="category_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="type" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-12">
+        <createTable tableName="item_type">
+            <column autoIncrement="true" name="type_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-13">
+        <createTable tableName="message">
+            <column autoIncrement="true" name="message_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="chat_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(500)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-14">
+        <createTable tableName="order">
+            <column autoIncrement="true" name="order_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="restaurant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_status" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_status" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-15">
+        <createTable tableName="order_item">
+            <column name="order_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="item_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-16">
+        <createTable tableName="restaurant">
+            <column autoIncrement="true" name="restaurant_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="photo_url" type="VARCHAR(255)"/>
+            <column name="restaurant_hours" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-17">
+        <createTable tableName="restaurant_address">
+            <column name="address_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="city_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-18">
+        <createTable tableName="restaurant_hours">
+            <column autoIncrement="true" name="hours_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="regular_opens" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regular_closes" type="time">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-19">
+        <createTable tableName="restaurant_item">
+            <column autoIncrement="true" name="restaurantitem_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="item_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dimension" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serve_start" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serve_until" type="time">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-20">
+        <createTable tableName="user">
+            <column autoIncrement="true" name="user_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_role" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthday" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photo_url" type="VARCHAR(256)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-21">
+        <createTable tableName="user_chat">
+            <column name="chat_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="owner_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-22">
+        <createTable tableName="user_confirmed_document">
+            <column name="document_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="confirmation_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-23">
+        <createTable tableName="user_creds">
+            <column name="user_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(45)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-24">
+        <createTable tableName="user_email">
+            <column autoIncrement="true" name="user_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="email" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_confirmed" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_subscribed" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-25">
+        <createTable tableName="user_favourites">
+            <column name="user_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="restaurantitem_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-26">
+        <createTable tableName="user_phone">
+            <column autoIncrement="true" name="number_id" type="INT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="phone_number" type="VARCHAR(45)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="country_code" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_confirmed" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-27">
+        <createIndex indexName="address_city_fk_idx" tableName="restaurant_address">
+            <column name="city_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-28">
+        <createIndex indexName="category_type_fk_idx" tableName="item_category">
+            <column name="type"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-29">
+        <createIndex indexName="chat_user_fk_idx" tableName="user_chat">
+            <column name="owner_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-30">
+        <createIndex indexName="city_country_fk_idx" tableName="city">
+            <column name="country_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-31">
+        <createIndex indexName="code_purpose_fk_idx" tableName="confirmation_code">
+            <column name="code_purpose"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-32">
+        <createIndex indexName="code_user_fk" tableName="confirmation_code">
+            <column name="owner_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-33">
+        <createIndex indexName="confirmed_user_fk_idx" tableName="user_confirmed_document">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-34">
+        <createIndex indexName="exception_day_fk_idx" tableName="hours_exceptions">
+            <column name="exception_day"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-35">
+        <createIndex indexName="favourites_restitem_fk_idx" tableName="user_favourites">
+            <column name="restaurantitem_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-36">
+        <createIndex indexName="item_category_fk_idx" tableName="item">
+            <column name="category"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-37">
+        <createIndex indexName="message_chat_fk_idx" tableName="message">
+            <column name="chat_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-38">
+        <createIndex indexName="message_user_fk_idx" tableName="message">
+            <column name="owner_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-39">
+        <createIndex indexName="order_restaurant_fk_idx" tableName="order">
+            <column name="restaurant_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-40">
+        <createIndex indexName="order_user_fk_idx" tableName="order">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-41">
+        <createIndex indexName="orderitem_restitem_fk_idx" tableName="order_item">
+            <column name="item_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-42">
+        <createIndex indexName="phone_county_fk_idx" tableName="user_phone">
+            <column name="country_code"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-43">
+        <createIndex indexName="restaurant_address_fk_idx" tableName="restaurant">
+            <column name="address"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-44">
+        <createIndex indexName="restaurant_hours_fk_idx" tableName="restaurant">
+            <column name="restaurant_hours"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-45">
+        <createIndex indexName="restaurantitem_dimension_fk_idx" tableName="restaurant_item">
+            <column name="dimension"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-46">
+        <createIndex indexName="restaurantitem_item_fk" tableName="restaurant_item">
+            <column name="item_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-47">
+        <createIndex indexName="restaurantitem_restaurant_fk_idx" tableName="restaurant_item">
+            <column name="restaurant_id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-48">
+        <addForeignKeyConstraint baseColumnNames="city_id" baseTableName="restaurant_address" constraintName="address_city_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="city_id" referencedTableName="city" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-49">
+        <addForeignKeyConstraint baseColumnNames="type" baseTableName="item_category" constraintName="category_type_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="type_id" referencedTableName="item_type" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-50">
+        <addForeignKeyConstraint baseColumnNames="country_id" baseTableName="city" constraintName="city_country_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="country_id" referencedTableName="country" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-51">
+        <addForeignKeyConstraint baseColumnNames="code_purpose" baseTableName="confirmation_code" constraintName="code_purpose_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="purpose_id" referencedTableName="code_purpose" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-52">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="confirmation_code" constraintName="code_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-53">
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="user_confirmed_document" constraintName="confirmed_doc_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="document_id" referencedTableName="document" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-54">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_confirmed_document" constraintName="confirmed_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-55">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_creds" constraintName="creds_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-56">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_email" constraintName="email_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-57">
+        <addForeignKeyConstraint baseColumnNames="exception_day" baseTableName="hours_exceptions" constraintName="exception_day_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="day_id" referencedTableName="day_of_week" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-58">
+        <addForeignKeyConstraint baseColumnNames="hours_id" baseTableName="hours_exceptions" constraintName="exception_hours_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="hours_id" referencedTableName="restaurant_hours" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-59">
+        <addForeignKeyConstraint baseColumnNames="restaurantitem_id" baseTableName="user_favourites" constraintName="favourites_restitem_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="restaurantitem_id" referencedTableName="restaurant_item" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-60">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_favourites" constraintName="favourites_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-61">
+        <addForeignKeyConstraint baseColumnNames="category" baseTableName="item" constraintName="item_category_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="category_id" referencedTableName="item_category" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-62">
+        <addForeignKeyConstraint baseColumnNames="chat_id" baseTableName="message" constraintName="message_chat_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="chat_id" referencedTableName="chat" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-63">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="message" constraintName="message_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-64">
+        <addForeignKeyConstraint baseColumnNames="restaurant_id" baseTableName="order" constraintName="order_restaurant_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="restaurant_id" referencedTableName="restaurant" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-65">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="order" constraintName="order_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-66">
+        <addForeignKeyConstraint baseColumnNames="order_id" baseTableName="order_item" constraintName="orderitem_order_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="order_id" referencedTableName="order" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-67">
+        <addForeignKeyConstraint baseColumnNames="item_id" baseTableName="order_item" constraintName="orderitem_restitem_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="restaurantitem_id" referencedTableName="restaurant_item" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-68">
+        <addForeignKeyConstraint baseColumnNames="country_code" baseTableName="user_phone" constraintName="phone_county_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="country_phone_code" referencedTableName="country" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-69">
+        <addForeignKeyConstraint baseColumnNames="phone_number" baseTableName="user_phone" constraintName="phone_creds_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="phone_number" referencedTableName="user_creds" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-70">
+        <addForeignKeyConstraint baseColumnNames="address" baseTableName="restaurant" constraintName="restaurant_address_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="address_id" referencedTableName="restaurant_address" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-71">
+        <addForeignKeyConstraint baseColumnNames="restaurant_hours" baseTableName="restaurant" constraintName="restaurant_hours_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="hours_id" referencedTableName="restaurant_hours" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-72">
+        <addForeignKeyConstraint baseColumnNames="dimension" baseTableName="restaurant_item" constraintName="restaurantitem_dimension_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="dimension_id" referencedTableName="dimension" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-73">
+        <addForeignKeyConstraint baseColumnNames="item_id" baseTableName="restaurant_item" constraintName="restaurantitem_item_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="item_id" referencedTableName="item" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-74">
+        <addForeignKeyConstraint baseColumnNames="restaurant_id" baseTableName="restaurant_item" constraintName="restaurantitem_restaurant_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="restaurant_id" referencedTableName="restaurant" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-75">
+        <addForeignKeyConstraint baseColumnNames="chat_id" baseTableName="user_chat" constraintName="userchat_chat_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="chat_id" referencedTableName="chat" validate="true"/>
+    </changeSet>
+
+    <changeSet author="user (generated)" id="1577370886411-76">
+        <addForeignKeyConstraint baseColumnNames="owner_id" baseTableName="user_chat" constraintName="userchat_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
