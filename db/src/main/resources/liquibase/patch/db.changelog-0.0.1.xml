@@ -2,20 +2,14 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
-    <changeSet id="2019-12-02 00:31" author="Anton Alekseev">
-        <sql dbms="postgresql" endDelimiter=";">
-            CREATE SCHEMA foodbox
-        </sql>
-    </changeSet>
     
     <changeSet id="2019-12-02 12:14" author="Anton Alekseev">
         <preConditions>
             <not>
-                <tableExists tableName="users" schemaName="foodbox"/>
+                <tableExists tableName="users"/>
             </not>
         </preConditions>
-        <createTable tableName="users" schemaName="foodbox">
+        <createTable tableName="users">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USERS"/>
             </column>
@@ -34,17 +28,17 @@
             <column name="photo_url" type="VARCHAR2(256)"/>
         </createTable>
         <rollback>
-            <dropTable tableName="users" schemaName="foodbox"/>
+            <dropTable tableName="users"/>
         </rollback>
     </changeSet>
 
     <changeSet id="2019-12-02 13:15" author="Anton Alekseev">
         <preConditions>
             <not>
-                <tableExists tableName="user_creds" schemaName="foodbox"/>
+                <tableExists tableName="user_creds"/>
             </not>
         </preConditions>
-        <createTable tableName="user_creds" schemaName="foodbox">
+        <createTable tableName="user_creds">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_CREDS"/>
             </column>
@@ -53,26 +47,26 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="user_creds" schemaName="foodbox"/>
+            <dropTable tableName="user_creds"/>
         </rollback>
     </changeSet>
 
     <changeSet id="2019-12-02 13:32" author="Anton Alekseev">
-        <addForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" baseColumnNames="id"
+        <addForeignKeyConstraint baseTableName="user_creds" baseColumnNames="id"
                                  constraintName="fk_user_creds" referencedTableName="users"
-                                 referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
+                                 referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableName="user_creds" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
+            <dropForeignKeyConstraint baseTableName="user_creds" constraintName="fk_user_creds"/>
         </rollback>
     </changeSet>
 
     <changeSet id="2019-12-02 17:11" author="Anton Alekseev">
         <preConditions>
             <not>
-                <tableExists tableName="phones" schemaName="foodbox"/>
+                <tableExists tableName="phones"/>
             </not>
         </preConditions>
-        <createTable tableName="phones" schemaName="foodbox">
+        <createTable tableName="phones">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PHONES"/>
             </column>
@@ -87,26 +81,26 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="phones" schemaName="foodbox"/>
+            <dropTable tableName="phones"/>
         </rollback>
     </changeSet>
 
     <changeSet id="2019-12-02 17:31" author="Anton Alekseev">
-        <addForeignKeyConstraint baseTableName="phones" baseTableSchemaName="foodbox" baseColumnNames="id"
+        <addForeignKeyConstraint baseTableName="phones" baseColumnNames="id"
                                  constraintName="fk_users_phones" referencedTableName="user_creds"
-                                 referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
+                                 referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableName="phones" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
+            <dropForeignKeyConstraint baseTableName="phones" constraintName="fk_user_creds"/>
         </rollback>
     </changeSet>
 
     <changeSet id="2019-12-02 17:36" author="Anton Alekseev">
         <preConditions>
             <not>
-                <tableExists tableName="emails" schemaName="foodbox"/>
+                <tableExists tableName="emails"/>
             </not>
         </preConditions>
-        <createTable tableName="emails" schemaName="foodbox">
+        <createTable tableName="emails">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_EMAILS"/>
             </column>
@@ -121,16 +115,117 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="emails" schemaName="foodbox"/>
+            <dropTable tableName="emails"/>
         </rollback>
     </changeSet>
 
     <changeSet id="2019-12-02 17:37" author="Anton Alekseev">
-        <addForeignKeyConstraint baseTableName="emails" baseTableSchemaName="foodbox" baseColumnNames="id"
+        <addForeignKeyConstraint baseTableName="emails" baseColumnNames="id"
                                  constraintName="fk_users_emails" referencedTableName="users"
-                                 referencedTableSchemaName="foodbox" referencedColumnNames="id"/>
+                                 referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableName="emails" baseTableSchemaName="foodbox" constraintName="fk_user_creds"/>
+            <dropForeignKeyConstraint baseTableName="emails" constraintName="fk_user_creds"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2019-12-27 08:50" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="documents"/>
+            </not>
+        </preConditions>
+        <createTable tableName="documents">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DOCUMENTS"/>
+            </column>
+            <column name="name" type="VARCHAR2(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="BLOB">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="documents"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-27 08:55" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="confirmed_documents"/>
+            </not>
+        </preConditions>
+        <createTable tableName="confirmed_documents">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CONFIRMED_DOCUMENTS"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="document_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="confirm_date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="confirmed_documents"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-27 09:02" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="confirmed_documents" baseColumnNames="document_id"
+                                 constraintName="fk_confirmed_doc" referencedTableName="documents"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="confirmed_documents" constraintName="fk_confirmed_doc"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-27 09:13" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="confirmed_documents" baseColumnNames="user_id"
+                                 constraintName="fk_confirmed_user" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="confirmed_documents" constraintName="fk_confirmed_user"/>
+        </rollback>
+    </changeSet>
+
+    <!--<changeSet id="2019-12-27 09:18" author="Anton Alekseev">-->
+        <!--<preConditions>-->
+            <!--<not>-->
+                <!--<tableExists tableName="restaurants" schemaName="foodbox"/>-->
+            <!--</not>-->
+        <!--</preConditions>-->
+        <!--<createTable tableName="restaurants">-->
+            <!--<column name="id" type="BIGINT" autoIncrement="true">-->
+                <!--<constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESTAURANTS"/>-->
+            <!--</column>-->
+            <!--<column name="name" type="VARCHAR2(45)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="address_id" type="BIGINT">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="email" type="VARCHAR2(90)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="phone_number" type="VARCHAR(45)">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+            <!--<column name="description" type="VARCHAR2(255)"/>-->
+            <!--<column name="photo_url" type="VARCHAR2(255)"/>-->
+            <!--<column name="restaurant_hours" type="INT">-->
+                <!--<constraints nullable="false"/>-->
+            <!--</column>-->
+        <!--</createTable>-->
+        <!--<rollback>-->
+            <!--<dropTable tableName="confirmed_documents" schemaName="foodbox"/>-->
+        <!--</rollback>-->
+    <!--</changeSet>-->
 </databaseChangeLog>

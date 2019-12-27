@@ -574,11 +574,15 @@
     </changeSet>
 
     <changeSet author="user (generated)" id="1577370886411-53">
-        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="user_confirmed_document" constraintName="confirmed_doc_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="document_id" referencedTableName="document" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="document_id" baseTableName="user_confirmed_document"
+                                 constraintName="confirmed_doc_fk" deferrable="false" initiallyDeferred="false"
+                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="document_id" referencedTableName="document" validate="true"/>
     </changeSet>
 
     <changeSet author="user (generated)" id="1577370886411-54">
-        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_confirmed_document" constraintName="confirmed_user_fk" deferrable="false" initiallyDeferred="false" onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_confirmed_document"
+                                 constraintName="confirmed_user_fk" deferrable="false" initiallyDeferred="false"
+                                 onDelete="RESTRICT" onUpdate="RESTRICT" referencedColumnNames="user_id" referencedTableName="user" validate="true"/>
     </changeSet>
 
     <changeSet author="user (generated)" id="1577370886411-55">
