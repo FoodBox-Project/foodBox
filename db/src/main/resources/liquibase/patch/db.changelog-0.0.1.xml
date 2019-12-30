@@ -26,6 +26,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="photo_url" type="VARCHAR2(256)"/>
+            <column name="country_id" type="BIGINT"/>
         </createTable>
         <rollback>
             <dropTable tableName="users"/>
@@ -72,9 +73,6 @@
             </column>
             <column name="phone_number" type="VARCHAR2(20)">
                 <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="country_id" type="BIGINT">
-                <constraints nullable="false"/>
             </column>
             <column name="is_confirmed" type="BOOLEAN" defaultValueBoolean="false">
                 <constraints nullable="false"/>
@@ -196,36 +194,87 @@
         </rollback>
     </changeSet>
 
-    <!--<changeSet id="2019-12-27 09:18" author="Anton Alekseev">-->
-        <!--<preConditions>-->
-            <!--<not>-->
-                <!--<tableExists tableName="restaurants" schemaName="foodbox"/>-->
-            <!--</not>-->
-        <!--</preConditions>-->
-        <!--<createTable tableName="restaurants">-->
-            <!--<column name="id" type="BIGINT" autoIncrement="true">-->
-                <!--<constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESTAURANTS"/>-->
-            <!--</column>-->
-            <!--<column name="name" type="VARCHAR2(45)">-->
-                <!--<constraints nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="address_id" type="BIGINT">-->
-                <!--<constraints nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="email" type="VARCHAR2(90)">-->
-                <!--<constraints nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="phone_number" type="VARCHAR(45)">-->
-                <!--<constraints nullable="false"/>-->
-            <!--</column>-->
-            <!--<column name="description" type="VARCHAR2(255)"/>-->
-            <!--<column name="photo_url" type="VARCHAR2(255)"/>-->
-            <!--<column name="restaurant_hours" type="INT">-->
-                <!--<constraints nullable="false"/>-->
-            <!--</column>-->
-        <!--</createTable>-->
-        <!--<rollback>-->
-            <!--<dropTable tableName="confirmed_documents" schemaName="foodbox"/>-->
-        <!--</rollback>-->
-    <!--</changeSet>-->
+    <changeSet id="2019-12-27 09:18" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="restaurants" schemaName="foodbox"/>
+            </not>
+        </preConditions>
+        <createTable tableName="restaurants">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESTAURANTS"/>
+            </column>
+            <column name="name" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="VARCHAR2(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR2(255)"/>
+            <column name="photo_url" type="VARCHAR2(255)"/>
+            <column name="restaurant_hours" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="confirmed_documents" schemaName="foodbox"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-30 10:05" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <columnExists tableName="users" columnName="restaurant_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="users">
+            <column name="restaurant_id" type="BIGINT"/>
+        </addColumn>
+        <rollback>
+            <dropColumn tableName="users" columnName="restaurant_id"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-30 10:24" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="restaurant_id"
+                                 constraintName="fk_user_restaurant" referencedTableName="restaurants"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="users" constraintName="fk_user_restaurant"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2019-12-30 11:22" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="countries"/>
+            </not>
+        </preConditions>
+        <createTable tableName="countries">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_COUNTRIES"/>
+            </column>
+            <column name="name" type="VARCHAR2(70)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="abbreviation" type="VARCHAR2(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2019-12-30 11:34" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="country_id"
+                                 constraintName="fk_user_country" referencedTableName="countries"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="users" constraintName="fk_user_country"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>
