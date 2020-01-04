@@ -19,6 +19,10 @@
         <module>admin-server</module>
     </modules>
 
+    <properties>
+        <jpa.version>2.2</jpa.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -63,6 +67,16 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.10</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

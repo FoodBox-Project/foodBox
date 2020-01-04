@@ -11,5 +11,13 @@
 
     <artifactId>model</artifactId>
 
+    <dependencies>
+        <!--jpa-->
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>${jpa.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
