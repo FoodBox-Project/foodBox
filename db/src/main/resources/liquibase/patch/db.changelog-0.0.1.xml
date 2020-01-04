@@ -197,7 +197,7 @@
     <changeSet id="2019-12-27 09:18" author="Anton Alekseev">
         <preConditions>
             <not>
-                <tableExists tableName="restaurants" schemaName="foodbox"/>
+                <tableExists tableName="restaurants"/>
             </not>
         </preConditions>
         <createTable tableName="restaurants">
@@ -223,7 +223,7 @@
             </column>
         </createTable>
         <rollback>
-            <dropTable tableName="confirmed_documents" schemaName="foodbox"/>
+            <dropTable tableName="confirmed_documents"/>
         </rollback>
     </changeSet>
 
@@ -267,6 +267,9 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <rollback>
+            <dropTable tableName="countries"/>
+        </rollback>
     </changeSet>
 
     <changeSet id="2019-12-30 11:34" author="Anton Alekseev">
@@ -275,6 +278,140 @@
                                  referencedColumnNames="id"/>
         <rollback>
             <dropForeignKeyConstraint baseTableName="users" constraintName="fk_user_country"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:25" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="orders"/>
+            </not>
+        </preConditions>
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ORDERS"/>
+            </column>
+            <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_status" type="VARCHAR2(45)"/>
+            <column name="user_status" type="VARCHAR2(45)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="orders"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:33" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="orders_items"/>
+            </not>
+        </preConditions>
+        <createTable tableName="orders_items">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ORDERS_ITEMS"/>
+            </column>
+            <column name="order_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="orders_items"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:43" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="user_id"
+                                 constraintName="fk_user_orders" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="orders" constraintName="fk_user_orders"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:46" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="restaurant_id"
+                                 constraintName="fk_restaurant_orders" referencedTableName="restaurants"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="restaurants" constraintName="fk_restaurant_orders"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:47" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="orders_items" baseColumnNames="order_id"
+                                 constraintName="fk_order_item" referencedTableName="orders"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="orders" constraintName="fk_order_item"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:58" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="restaurant_items"/>
+            </not>
+        </preConditions>
+        <createTable tableName="restaurant_items">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESTAURANT_ITEMS"/>
+            </column>
+            <column name="item_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="size" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dimension_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serve_start" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serve_until" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="restaurant_items"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 10:51" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="orders_items" baseColumnNames="item_id"
+                                 constraintName="fk_order_restaurant_item" referencedTableName="restaurant_items"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="orders" constraintName="fk_order_restaurant_item"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-04 11:16" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="restaurant_items" baseColumnNames="restaurant_id"
+                                 constraintName="fk_restaurants_items" referencedTableName="restaurants"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="restaurant_items" constraintName="fk_restaurants_items"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>
