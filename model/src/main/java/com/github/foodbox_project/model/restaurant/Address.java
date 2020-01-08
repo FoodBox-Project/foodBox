@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class RestaurantAddress extends AEntity {
+public class Address extends AEntity {
 
     private City city;
     private String address;

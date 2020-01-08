@@ -23,7 +23,6 @@ public class RestaurantItem extends AEntity {
     private Item item;
     private Restaurant restaurant;
     private Double price;
-    //TODO create currency!!!
     private Double size;
     private Dimension dimension;
     private Timestamp serveStart;

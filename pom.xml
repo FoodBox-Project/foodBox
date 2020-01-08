@@ -8,6 +8,7 @@
     <artifactId>FoodBox</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
+    <name>FoodBox</name>
     <modules>
         <module>api</module>
         <module>model</module>
@@ -18,6 +19,13 @@
         <module>utility</module>
         <module>admin-server</module>
     </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.2.RELEASE</version>
+        <relativePath/>
+    </parent>
 
     <properties>
         <jpa.version>2.2</jpa.version>

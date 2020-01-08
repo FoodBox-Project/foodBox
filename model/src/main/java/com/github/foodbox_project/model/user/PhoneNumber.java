@@ -1,60 +1,31 @@
 package com.github.foodbox_project.model.user;
 
-import java.util.Objects;
+import com.github.foodbox_project.model.AEntity;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Created by earthofmarble on Nov, 2019
  */
 
-public class PhoneNumber { // TODO
+@Entity
+@Table(name = "phones")
+@Getter
+@Setter
+public class PhoneNumber extends AEntity {
 
-    private Integer id;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
+    private User user;
+    @Column(name = "phone_number")
     private String phoneNumber;
-    private String Country;
+    @Column(name = "is_confirmed")
     private Boolean isConfirmed;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getCountry() {
-        return Country;
-    }
-
-    public void setCountry(String country) {
-        Country = country;
-    }
-
-    public Boolean getConfirmed() {
-        return isConfirmed;
-    }
-
-    public void setConfirmed(Boolean confirmed) {
-        isConfirmed = confirmed;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof PhoneNumber)) return false;
-        PhoneNumber that = (PhoneNumber) o;
-        return getId().equals(that.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
 }
