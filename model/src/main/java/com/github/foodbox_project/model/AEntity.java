@@ -15,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class AEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", unique = true, updatable = false, nullable = false)
     @Getter
     @Setter
