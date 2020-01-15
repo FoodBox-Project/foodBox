@@ -122,7 +122,7 @@
                                  constraintName="fk_users_emails" referencedTableName="users"
                                  referencedColumnNames="id"/>
         <rollback>
-            <dropForeignKeyConstraint baseTableName="emails" constraintName="fk_user_creds"/>
+            <dropForeignKeyConstraint baseTableName="emails" constraintName="fk_users_emails"/>
         </rollback>
     </changeSet>
 
@@ -412,6 +412,31 @@
                                  referencedColumnNames="id"/>
         <rollback>
             <dropForeignKeyConstraint baseTableName="restaurant_items" constraintName="fk_restaurants_items"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-08 14:30" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="emails" baseColumnNames="id"
+                                 constraintName="fk_users_email" referencedTableName="user_creds"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="emails" constraintName="fk_users_email"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-01-08 14:31" author="Anton Alekseev">
+        <preConditions>
+            <foreignKeyConstraintExists foreignKeyTableName="phones" foreignKeyName="fk_users_phones"/>
+        </preConditions>
+        <dropForeignKeyConstraint baseTableName="phones" constraintName="fk_users_phones"/>
+    </changeSet>
+
+    <changeSet id="2020-01-08 14:35" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="phones" baseColumnNames="id"
+                                 constraintName="fk_users_phones" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="phones" constraintName="fk_users_phones"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

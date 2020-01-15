@@ -7,7 +7,15 @@ import com.github.foodbox_project.model.user.User;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,34 +23,36 @@ import java.util.List;
  * Created by earthofmarble on Nov, 2019
  */
 
+@Entity
+@Table(name = "restaurant_items")
 @Getter
 @Setter
 public class RestaurantItem extends AEntity {
 
-    private Integer id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
     private Item item;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+    @Column(name = "price")
     private Double price;
-    //TODO create currency!!!
+    @Column(name = "size")
     private Double size;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dimension_id")
     private Dimension dimension;
-    private Timestamp serveStart;
-    private Timestamp serveUntil;
-
+    @Column(name = "serve_start")
+    private LocalDate serveStart;
+    @Column(name = "serve_until")
+    private LocalDate serveUntil;
+    @ManyToMany(mappedBy = "favouriteItems")
     private List<User> favouriteSelectors;
-    private List<Order> ordersWherePresented;
 
     public List<User> getFavouriteSelectors() {
         if (favouriteSelectors == null) {
             favouriteSelectors = new ArrayList<>();
         }
         return favouriteSelectors;
-    }
-
-    public List<Order> getOrdersWherePresented() {
-        if (ordersWherePresented == null) {
-            ordersWherePresented = new ArrayList<>();
-        }
-        return ordersWherePresented;
     }
 }

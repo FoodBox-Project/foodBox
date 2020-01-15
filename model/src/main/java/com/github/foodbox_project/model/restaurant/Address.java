@@ -1,6 +1,7 @@
-package com.github.foodbox_project.model.meal;
+package com.github.foodbox_project.model.restaurant;
 
 import com.github.foodbox_project.model.AEntity;
+import com.github.foodbox_project.model.address.City;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,16 +18,15 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "item_categories")
+@Table(name = "addresses")
 @Getter
 @Setter
-public class ItemCategory extends AEntity {
+public class Address extends AEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
-    private ItemType type;
-    @Column(name = "name")
-    private String name;
-    @Column(name = "description")
-    private String description;
+    @JoinColumn(name = "city_id")
+    private City city;
+    @Column(name = "address")
+    private String address;
+
 }
