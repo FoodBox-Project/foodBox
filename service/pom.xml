@@ -17,6 +17,11 @@
             <groupId>com.github.foodbox_project</groupId>
             <artifactId>api</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.foodbox_project</groupId>
+            <artifactId>dal</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
