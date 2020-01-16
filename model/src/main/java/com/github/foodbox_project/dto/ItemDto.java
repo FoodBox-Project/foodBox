@@ -1,4 +1,4 @@
-package com.github.foodbox_project.server.dto;
+package com.github.foodbox_project.dto;
 
 import lombok.Getter;
 import lombok.Setter;

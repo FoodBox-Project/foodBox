@@ -2,7 +2,7 @@ package com.github.foodbox_project.server.controller;
 
 import com.github.foodbox_project.api.service.meal.IItemService;
 import com.github.foodbox_project.model.meal.Item;
-import com.github.foodbox_project.server.dto.ItemDto;
+import com.github.foodbox_project.dto.ItemDto;
 import com.github.foodbox_project.server.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

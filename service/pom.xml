@@ -17,6 +17,13 @@
             <groupId>com.github.foodbox_project</groupId>
             <artifactId>dal</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>2.3.6</version>
+        </dependency>
+
     </dependencies>
 
 </project>
