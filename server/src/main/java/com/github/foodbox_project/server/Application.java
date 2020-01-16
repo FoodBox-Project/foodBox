@@ -11,8 +11,7 @@ import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.github.foodbox_project.dal")
-@EnableTransactionManagement
-@ComponentScan({"com.github.foodbox_project.dal", "com.github.foodbox_project.service", "com.github.foodbox_project.server"})
+@ComponentScan({"com.github.foodbox_project.service", "com.github.foodbox_project.server"})
 @EntityScan("com.github.foodbox_project.model")
 public class Application {
 
@@ -20,4 +19,6 @@ public class Application {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         SpringApplication.run(Application.class, args);
     }
+
+
 }

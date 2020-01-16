@@ -7,8 +7,10 @@ import com.github.foodbox_project.model.user.User;
 import com.github.foodbox_project.service.GenericService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserService extends GenericService<User, Long> implements IUserService {
 
