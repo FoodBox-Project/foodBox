@@ -34,4 +34,9 @@ public abstract class GenericService<T extends AEntity, ID extends Serializable>
     public void deleteById(ID id) {
         getDao().deleteById(id);
     }
+
+    protected long countPages(int pageSize) {
+        double itemsCount = (double) getDao().count();
+        return (long) Math.ceil(itemsCount/pageSize);
+    }
 }
