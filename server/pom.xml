@@ -11,12 +11,7 @@
 
     <artifactId>server</artifactId>
 
-
     <dependencies>
-        <dependency>
-            <groupId>com.github.foodbox_project</groupId>
-            <artifactId>dal</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.github.foodbox_project</groupId>
             <artifactId>service</artifactId>
@@ -27,6 +22,28 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.github.foodbox_project.server.Application</mainClass>
+                    <executable>true</executable>
+                    <additionalProperties>
+                        <java.source>${maven.compiler.source}</java.source>
+                        <java.target>${maven.compiler.target}</java.target>
+                    </additionalProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
