@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Appenders>
+
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable" />
+        </Console>
+
+        <RollingFile
+                name="FILE_INFO"
+                fileName="logs/info.log"
+                filePattern="logs/info-%d{yyyy-MM-dd}.%i.log"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %c{1.} - %msg%n%ex</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+        <RollingFile
+                name="FILE_DEBUG"
+                fileName="logs/debug.log"
+                filePattern="logs/debug-%d{yyyy-MM-dd}.%i.log"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %c{1.} - %msg%n%ex</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+        <RollingFile
+                name="FILE_WARN"
+                fileName="logs/warn.log"
+                filePattern="logs/warn-%d{yyyy-MM-dd}.%i.log"
+                ignoreExceptions="false">
+            <PatternLayout>
+                <Pattern>%d{dd/MM/yyyy HH:mm:ss.SSS} [%thread] %-5level %c{1.} - %msg%n%ex</Pattern>
+            </PatternLayout>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="100"/>
+        </RollingFile>
+    </Appenders>
+
+    <loggers>
+        <root level="debug">
+            <appender-ref ref="FILE_DEBUG" level="debug"/>
+            <appender-ref ref="FILE_INFO" level="info"/>
+            <appender-ref ref="FILE_WARN" level="warn"/>
+            <appender-ref ref="CONSOLE" level="info"/>
+        </root>
+        <logger name="org.hibernate" additivity="false">
+            <appender-ref ref="FILE_DEBUG" level="info"/>
+            <appender-ref ref="FILE_INFO" level="info"/>
+            <appender-ref ref="FILE_WARN" level="warn"/>
+            <appender-ref ref="CONSOLE" level="info"/>
+        </logger>
+        <logger name="org.springframework" additivity="false">
+            <appender-ref ref="FILE_DEBUG" level="info"/>
+            <appender-ref ref="FILE_INFO" level="info"/>
+            <appender-ref ref="FILE_WARN" level="warn"/>
+            <appender-ref ref="CONSOLE" level="info"/>
+        </logger>
+        <logger name="com.github.foodbox_project" additivity="false">
+            <appender-ref ref="FILE_DEBUG" level="debug"/>
+            <appender-ref ref="FILE_INFO" level="info"/>
+            <appender-ref ref="FILE_WARN" level="warn"/>
+            <appender-ref ref="CONSOLE" level="info"/>
+        </logger>
+
+    </loggers>
+
+</Configuration>
