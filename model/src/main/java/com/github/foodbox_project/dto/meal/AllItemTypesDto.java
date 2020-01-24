@@ -1,5 +1,6 @@
-package com.github.foodbox_project.dto;
+package com.github.foodbox_project.dto.meal;
 
+import com.github.foodbox_project.dto.meal.ItemTypeDto;
 import lombok.Getter;
 import lombok.Setter;
 
