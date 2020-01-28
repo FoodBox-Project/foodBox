@@ -7,10 +7,7 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Time;
 
 /**
  * Created by earthofmarble on Nov, 2019
@@ -23,9 +20,9 @@ import java.util.List;
 public class RestaurantHours extends AEntity {
 
     @Column(name = "regular_opens")
-    private LocalDate regularOpens;
+    private Time regularOpens;
     @Column(name = "regular_closes")
-    private LocalDate regularCloses;
+    private Time regularCloses;
 
 //    private List<HoursException> exceptions;
 //

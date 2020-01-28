@@ -26,3 +26,14 @@ services:
     - 30000:80
     links:
     - db
+
+  activemq:
+    image: rmohr/activemq:5.10.0
+    container_name: activemq
+    environment:
+    - "TZ=Europe/Minsk"
+    volumes:
+    - "./activemq/activemq.xml:/conf/activemq.xml"
+    ports:
+    - 61616:61616 # broker (admin:adminactivemq)(amq:amq)
+    - 8161:8161   # web    http://localhost:8161 (admin:admin)
