@@ -4,6 +4,8 @@ import com.github.foodbox_project.api.service.meal.IItemService;
 import com.github.foodbox_project.dto.ItemDto;
 import com.github.foodbox_project.model.meal.Item;
 import com.github.foodbox_project.server.response.Response;
+import com.github.foodbox_project.service.jms.JmsReceiver;
+import com.github.foodbox_project.service.jms.JmsSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemController {
 
     private final IItemService itemService;
+    private final JmsSender jmsSender;
+    private final JmsReceiver jmsReceiver;
 
     @GetMapping("/{id}")
     public Response<ItemDto> getById(@PathVariable Long id) { // todo
@@ -23,6 +27,8 @@ public class ItemController {
         ItemDto dto = new ItemDto();
         dto.setName(item.getName());
         dto.setDescription(item.getDescription());
+        jmsSender.send(dto);
+     //   jmsReceiver.getLatch();
         return new Response<>(dto);
     }
 

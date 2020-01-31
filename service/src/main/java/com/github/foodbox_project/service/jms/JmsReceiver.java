@@ -1,7 +1,9 @@
 package com.github.foodbox_project.service.jms;
 
+import com.github.foodbox_project.dto.ItemDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class JmsReceiver { // todo just for test. Move this class to the Notification server
 
     @JmsListener(destination = "${jms.receiver.destination}")
-    public void receive(String message) {
-        log.debug("received message = '{}'", message);
+    public void receive(@Payload ItemDto message) {
+        log.info("received message = '{}'", message);
     }
 }

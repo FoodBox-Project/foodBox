@@ -15,8 +15,8 @@ public class JmsSender {
     @Value("${jms.sender.destination}")
     private String destination;
 
-    public void send(String message) {
-        log.debug("sending message='{}'", message);
+    public void send(Object message) {
+        log.info("sending message='{}'", message);
         jmsTemplate.convertAndSend(destination, message);
     }
 }
