@@ -15,7 +15,7 @@ public class GlobalExceptionHandler extends ExceptionHandlerExceptionResolver {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllException(Exception e) {
-        log.error("", e);
+        log.error("Unexpected error: ", e);
         return new ResponseEntity<>(new Response<>(new ResponseError(ResponseError.ErrorType.UNEXPECTED_ERRORS, e.getMessage())),
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
