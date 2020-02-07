@@ -1,9 +1,9 @@
 package com.github.foodbox_project.model.meal;
 
 import com.github.foodbox_project.model.AEntity;
-import com.github.foodbox_project.model.order.Order;
 import com.github.foodbox_project.model.restaurant.Restaurant;
 import com.github.foodbox_project.model.user.User;
+import com.github.foodbox_project.model.user.User_;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class RestaurantItem extends AEntity {
     private LocalDate serveStart;
     @Column(name = "serve_until")
     private LocalDate serveUntil;
-    @ManyToMany(mappedBy = "favouriteItems")
+    @ManyToMany(mappedBy = User_.FAVOURITE_ITEMS)
     private List<User> favouriteSelectors;
 
     public List<User> getFavouriteSelectors() {

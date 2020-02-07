@@ -1,7 +1,6 @@
 package com.github.foodbox_project.model.order;
 
 import com.github.foodbox_project.model.AEntity;
-import com.github.foodbox_project.model.meal.Item;
 import com.github.foodbox_project.model.restaurant.Restaurant;
 import com.github.foodbox_project.model.user.User;
 import lombok.Getter;
@@ -44,7 +43,7 @@ public class Order extends AEntity {
     @Column(name = "user_status")
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = OrderItem_.ORDER)
     private List<OrderItem> orderItems;
 
     public List<OrderItem> getOrderItems() {
