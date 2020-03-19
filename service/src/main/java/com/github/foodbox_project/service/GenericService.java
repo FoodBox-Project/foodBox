@@ -21,11 +21,6 @@ public abstract class GenericService<T extends AEntity, ID extends Serializable>
     }
 
     @Override
-    public T update(T entity) {
-        return null; // todo
-    }
-
-    @Override
     public void delete(T entity) {
         getDao().delete(entity);
     }

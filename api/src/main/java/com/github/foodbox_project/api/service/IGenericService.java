@@ -10,8 +10,6 @@ public interface IGenericService<T extends AEntity, ID extends Serializable> {
 
     T getById(ID id);
 
-    T update(T entity);
-
     void delete(T entity);
 
     void deleteById(ID id);
