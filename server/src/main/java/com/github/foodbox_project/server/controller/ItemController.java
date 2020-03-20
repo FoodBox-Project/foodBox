@@ -5,6 +5,7 @@ import com.github.foodbox_project.model.meal.Item;
 import com.github.foodbox_project.dto.meal.ItemDto;
 import com.github.foodbox_project.server.response.Response;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,14 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class ItemController {
 
     private final IItemService itemService;
+    private final ModelMapper modelMapper;
 
     @GetMapping("/{id}")
     public Response<ItemDto> getById(@PathVariable Long id) {
         Item item = itemService.getById(id);
-        ItemDto dto = new ItemDto();
-        dto.setName(item.getName());
-        dto.setDescription(item.getDescription());
-        return new Response<>(dto);
+        return new Response<>(modelMapper.map(item, ItemDto.class));
     }
 
 }
