@@ -27,7 +27,6 @@
     <modules>
         <module>api</module>
         <module>model</module>
-        <module>db</module>
         <module>dal</module>
         <module>service</module>
         <module>server</module>
@@ -76,6 +75,11 @@
                 <groupId>com.github.foodbox_project</groupId>
                 <artifactId>utility</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>3.8.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
