@@ -657,7 +657,7 @@
         </preConditions>
         <createTable tableName="restaurant_hours">
             <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEM_TYPES"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_RESTAURANT_HOURS"/>
             </column>
             <column name="regular_opens" type="time">
                 <constraints nullable="false"/>
@@ -677,6 +677,41 @@
                                  referencedColumnNames="id"/>
         <rollback>
             <dropForeignKeyConstraint baseTableName="addresses" constraintName="fk_restaurant_hours"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 22:50" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="confirmation_codes"/>
+            </not>
+        </preConditions>
+        <createTable tableName="confirmation_codes">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CONFIRMATION_CODES"/>
+            </column>
+            <column name="owner_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code_purpose" type="VARCHAR(255)"/>
+            <column name="sent_to" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="confirmation_codes"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 22:55" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="confirmation_codes" baseColumnNames="owner_id"
+                                 constraintName="fk_confirmation_code_user" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="confirmation_codes" constraintName="fk_confirmation_code_user"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>
