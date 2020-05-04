@@ -20,6 +20,6 @@ public class Dimension extends AEntity {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "value")
-    private String value;
+    @Column(name = "text")
+    private String text;
 }

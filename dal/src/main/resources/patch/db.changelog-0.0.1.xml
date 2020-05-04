@@ -142,7 +142,7 @@
             <column name="content" type="BLOB">
                 <constraints nullable="false"/>
             </column>
-            <column name="version" type="INT">
+            <column name="version" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -617,7 +617,7 @@
         </preConditions>
         <createTable tableName="addresses">
             <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEM_TYPES"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ADDRESS"/>
             </column>
             <column name="city_id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -671,7 +671,7 @@
         </rollback>
     </changeSet>
 
-    <changeSet id="2020-05-04 16:50" author="Anton Alekseev">
+    <changeSet id="2020-05-04 16:55" author="Anton Alekseev">
         <addForeignKeyConstraint baseTableName="restaurants" baseColumnNames="restaurant_hours"
                                  constraintName="fk_restaurant_hours" referencedTableName="restaurant_hours"
                                  referencedColumnNames="id"/>
@@ -712,6 +712,43 @@
                                  referencedColumnNames="id"/>
         <rollback>
             <dropForeignKeyConstraint baseTableName="confirmation_codes" constraintName="fk_confirmation_code_user"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 23:20" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="user_favourites"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_favourites">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_USER_FAVOURITES"/>
+            </column>
+            <column name="restaurant_item_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="user_favourites"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 23:30" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="user_favourites" baseColumnNames="user_id"
+                                 constraintName="fk_user_favourites" referencedTableName="users"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="user_favourites" constraintName="fk_user_favourites"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 23:35" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="user_favourites" baseColumnNames="restaurant_item_id"
+                                 constraintName="fk_user_favourite_item" referencedTableName="restaurant_items"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="user_favourites" constraintName="fk_user_favourite_item"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

@@ -11,7 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by earthofmarble on Nov, 2019
@@ -30,6 +30,6 @@ public class ConfirmedDocument extends AEntity {
     @JoinColumn(name = "user_id")
     private User user;
     @Column(name = "confirm_date")
-    private LocalDate confirmationDate;
+    private LocalDateTime confirmationDate;
 
 }
