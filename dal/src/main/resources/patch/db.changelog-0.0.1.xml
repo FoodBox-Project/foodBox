@@ -439,4 +439,244 @@
             <dropForeignKeyConstraint baseTableName="phones" constraintName="fk_users_phones"/>
         </rollback>
     </changeSet>
+
+    <changeSet id="2020-05-04 14:41" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="cities"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cities">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CITIES"/>
+            </column>
+            <column name="country_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="cities"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 14:43" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="cities" baseColumnNames="country_id"
+                                 constraintName="fk_cities_country" referencedTableName="countries"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="cities" constraintName="fk_cities_country"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 14:48" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="dimensions"/>
+            </not>
+        </preConditions>
+        <createTable tableName="dimensions">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DIMENSIONS"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="text" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="dimensions"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 14:59" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="restaurant_items" baseColumnNames="dimension_id"
+                                 constraintName="fk_restaurant_items_dimension" referencedTableName="dimensions"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="dimensions" constraintName="fk_restaurant_items_dimension"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:05" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="items"/>
+            </not>
+        </preConditions>
+        <createTable tableName="items">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEMS"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="items"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:07" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="restaurant_items" baseColumnNames="item_id"
+                                 constraintName="fk_restaurant_items_item" referencedTableName="items"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="restaurant_items" constraintName="fk_restaurant_items_item"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:10" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="item_categories"/>
+            </not>
+        </preConditions>
+        <createTable tableName="item_categories">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEM_CATEGORIES"/>
+            </column>
+            <column name="type" type="BIGINT"/>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="item_categories"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:20" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="items" baseColumnNames="category_id"
+                                 constraintName="fk_items_category" referencedTableName="item_categories"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="items" constraintName="fk_items_category"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:30" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="item_types"/>
+            </not>
+        </preConditions>
+        <createTable tableName="item_types">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEM_TYPES"/>
+            </column>
+            <column name="name" type="VARCHAR(45)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_id" type="BIGINT"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="item_types"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:35" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="item_categories" baseColumnNames="type"
+                                 constraintName="fk_item_types" referencedTableName="item_types"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="items" constraintName="fk_item_types"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 15:40" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="item_types" baseColumnNames="restaurant_id"
+                                 constraintName="fk_restaurant_types" referencedTableName="restaurants"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="item_types" constraintName="fk_restaurant_types"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 16:30" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="addresses"/>
+            </not>
+        </preConditions>
+        <createTable tableName="addresses">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEM_TYPES"/>
+            </column>
+            <column name="city_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="addresses"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 16:40" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="restaurants" baseColumnNames="address_id"
+                                 constraintName="fk_restaurant_address" referencedTableName="addresses"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="restaurants" constraintName="fk_restaurant_address"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 16:45" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="addresses" baseColumnNames="city_id"
+                                 constraintName="fk_address_city" referencedTableName="cities"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="addresses" constraintName="fk_address_city"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 16:50" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="restaurant_hours"/>
+            </not>
+        </preConditions>
+        <createTable tableName="restaurant_hours">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ITEM_TYPES"/>
+            </column>
+            <column name="regular_opens" type="time">
+                <constraints nullable="false"/>
+            </column>
+            <column name="regular_closes" type="time">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="restaurant_hours"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="2020-05-04 16:50" author="Anton Alekseev">
+        <addForeignKeyConstraint baseTableName="restaurants" baseColumnNames="restaurant_hours"
+                                 constraintName="fk_restaurant_hours" referencedTableName="restaurant_hours"
+                                 referencedColumnNames="id"/>
+        <rollback>
+            <dropForeignKeyConstraint baseTableName="addresses" constraintName="fk_restaurant_hours"/>
+        </rollback>
+    </changeSet>
 </databaseChangeLog>

@@ -14,19 +14,49 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="user (generated)" id="1577370886411-2">
-        <createTable tableName="city">
-            <column autoIncrement="true" name="city_id" type="INT">
-                <constraints primaryKey="true"/>
+<!--    <changeSet author="user (generated)" id="1577370886411-2">-->
+<!--        <createTable tableName="city">-->
+<!--            <column autoIncrement="true" name="city_id" type="INT">-->
+<!--                <constraints primaryKey="true"/>-->
+<!--            </column>-->
+<!--            <column name="country_id" type="INT">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="city_name" type="VARCHAR(45)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+    <changeSet id="2020-01-04 10:25" author="Anton Alekseev">
+        <preConditions>
+            <not>
+                <tableExists tableName="orders"/>
+            </not>
+        </preConditions>
+        <createTable tableName="orders">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ORDERS"/>
             </column>
-            <column name="country_id" type="INT">
+            <column name="restaurant_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="city_name" type="VARCHAR(45)">
+            <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
+            <column name="date" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="restaurant_status" type="VARCHAR2(45)"/>
+            <column name="user_status" type="VARCHAR2(45)"/>
         </createTable>
+        <rollback>
+            <dropTable tableName="orders"/>
+        </rollback>
     </changeSet>
+
+
 
     <changeSet author="user (generated)" id="1577370886411-3">
         <createTable tableName="code_purpose">
