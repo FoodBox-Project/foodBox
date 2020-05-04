@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name = "dimension")
+@Table(name = "dimensions")
 @Getter
 @Setter
 public class Dimension extends AEntity {

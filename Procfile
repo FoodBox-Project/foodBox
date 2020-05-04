@@ -1,0 +1,1 @@
+web: java -Dspring.profiles.active=heroku -jar server/target/*.jar

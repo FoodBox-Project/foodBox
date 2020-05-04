@@ -2,8 +2,6 @@ package com.github.foodbox_project.model.user;
 
 import com.github.foodbox_project.model.AEntity;
 import com.github.foodbox_project.model.address.Country;
-import com.github.foodbox_project.model.chat.Chat;
-import com.github.foodbox_project.model.chat.Message;
 import com.github.foodbox_project.model.meal.RestaurantItem;
 import com.github.foodbox_project.model.order.Order;
 import lombok.Getter;
@@ -21,11 +19,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by earthofmarble on Nov, 2019
