@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +42,9 @@ public class RestaurantItem extends AEntity {
     @JoinColumn(name = "dimension_id")
     private Dimension dimension;
     @Column(name = "serve_start")
-    private LocalDate serveStart;
+    private LocalDateTime serveStart;
     @Column(name = "serve_until")
-    private LocalDate serveUntil;
+    private LocalDateTime serveUntil;
     @ManyToMany(mappedBy = User_.FAVOURITE_ITEMS)
     private List<User> favouriteSelectors;
 

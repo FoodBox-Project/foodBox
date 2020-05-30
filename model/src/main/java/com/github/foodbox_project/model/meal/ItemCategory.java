@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class ItemCategory extends AEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "type_id")
+    @JoinColumn(name = "type")
     private ItemType type;
     @Column(name = "name")
     private String name;

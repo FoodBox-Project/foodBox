@@ -19,7 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class User extends AEntity {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
     @Column(name = "birthday")
-    private LocalDate birthday;
+    private LocalDateTime birthday;
     @Column(name = "photo_url")
     private String photoUrl;
     @ManyToOne(fetch = FetchType.LAZY)
