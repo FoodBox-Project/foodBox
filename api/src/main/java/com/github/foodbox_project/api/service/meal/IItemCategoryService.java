@@ -9,4 +9,6 @@ import java.util.List;
 public interface IItemCategoryService extends IGenericService<ItemCategory, Long> {
 
     List<ItemCategoryDto> getByItemTypeId(Long typeId);
+
+    ItemCategoryDto save(ItemCategoryDto request);
 }

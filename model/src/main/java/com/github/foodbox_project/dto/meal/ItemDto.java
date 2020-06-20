@@ -1,13 +1,14 @@
 package com.github.foodbox_project.dto.meal;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ItemDto {
 
     private Long id;
     private String name;
     private String description;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long itemCategoryId;
 }

@@ -12,4 +12,6 @@ public interface IRestaurantService extends IGenericService<Restaurant, Long> {
     List<RestaurantDto> getAll();
 
     RestaurantFullInfoDto getFullInfo(Long id);
+
+    RestaurantDto save(RestaurantDto restaurantDto);
 }

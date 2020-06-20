@@ -1,4 +1,4 @@
-package com.github.foodbox_project.model.restaurant;
+package com.github.foodbox_project.model.address;
 
 import com.github.foodbox_project.model.AEntity;
 import com.github.foodbox_project.model.address.City;

@@ -1,13 +1,12 @@
 package com.github.foodbox_project.dto.meal;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class ItemCategoryDto {
 
     private Long id;
     private String name;
     private String description;
+    private Long itemTypeId;
 }
