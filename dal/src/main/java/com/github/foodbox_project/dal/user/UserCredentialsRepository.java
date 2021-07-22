@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserCredentialsRepository extends GenericRepository<UserCredentials, Long> {
+
+    UserCredentials getByEmail_Email(String email);
+
 }
