@@ -1,7 +1,9 @@
 # FoodBox project
 - to connect to the database use localhost:54320 username:foodbox, password: foodbox
 - to start phpPgAdmin http://localhost:30000/ username:foodbox, password: foodbox
-- To run the application using a remote database on the Heroku host, you need to set the VM options in the startup parameters: -Dspring.profiles.active = heroku
+- To run the application using a remote database on the Heroku host, you need to set the VM options in the startup parameters: -Dspring.profiles.active=heroku
+
+
 #API
 ##ItemTypes
 - get all item categories by item type id
