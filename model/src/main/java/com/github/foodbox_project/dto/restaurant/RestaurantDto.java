@@ -1,10 +1,9 @@
 package com.github.foodbox_project.dto.restaurant;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class RestaurantDto {
 
     private Long id;
@@ -12,4 +11,8 @@ public class RestaurantDto {
     private String phoneNumber;
     private String description;
     private String photoUrl;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long addressId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Long restaurantHoursId;
 }

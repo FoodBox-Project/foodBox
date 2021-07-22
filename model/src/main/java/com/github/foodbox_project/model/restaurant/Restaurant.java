@@ -1,6 +1,7 @@
 package com.github.foodbox_project.model.restaurant;
 
 import com.github.foodbox_project.model.AEntity;
+import com.github.foodbox_project.model.address.Address;
 import com.github.foodbox_project.model.meal.ItemType;
 import com.github.foodbox_project.model.meal.ItemType_;
 import com.github.foodbox_project.model.meal.RestaurantItem;

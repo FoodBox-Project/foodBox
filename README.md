@@ -26,7 +26,30 @@ Response:
          }
        ]
      } 
+
+- add new items type    
+ 
+POST
+
+http://localhost:8080/item-types
+
+Request:
+
+     {
+      "name": "items type name",
+      "description": "items type description",
+      "restaurantId": 1
+     }
      
+Response:
+     
+     {
+      "id": 1,
+      "name": "items type name",
+      "description": "items type description",
+      "restaurantId": 1
+     } 
+         
 ##ItemCategory
 - get all items from category by category id
 
@@ -50,6 +73,29 @@ Response:
         } 
       ]
     }
+    
+- add new items category    
+ 
+POST
+
+http://localhost:8080/item-categories
+
+Request:
+
+     {
+      "name": "items category name",
+      "description": "items category description",
+      "itemTypeId": 1
+     }
+     
+Response:
+     
+     {
+      "id": 1,
+      "name": "items category name",
+      "description": "items category description",
+      "itemTypeId": 1
+     }     
  
 ##Item
 - get Item by id

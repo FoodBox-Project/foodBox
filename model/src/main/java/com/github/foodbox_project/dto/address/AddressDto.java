@@ -1,6 +1,5 @@
-package com.github.foodbox_project.dto.restaurant;
+package com.github.foodbox_project.dto.address;
 
-import com.github.foodbox_project.dto.address.CityDto;
 import lombok.Getter;
 import lombok.Setter;
 
