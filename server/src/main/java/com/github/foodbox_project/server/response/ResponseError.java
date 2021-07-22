@@ -37,7 +37,8 @@ public class ResponseError {
         UNEXPECTED_ERRORS("UnexpectedErrors"),
         FORBIDDEN("Forbidden"),
         ACCESS_DENIED("AccessDenied"),
-        FORBIDDEN_DELETE_ENTITY("Forbidden delete entity");
+        FORBIDDEN_DELETE_ENTITY("Forbidden delete entity"),
+        ENTITY_NOT_FOUND("Entity not found");
 
         private String name;
 

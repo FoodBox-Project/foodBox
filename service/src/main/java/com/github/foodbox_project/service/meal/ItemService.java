@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,14 @@ public class ItemService extends GenericService<Item, Long> implements IItemServ
         return items.stream()
                 .map(item -> modelMapper.map(item, ItemDto.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ItemDto getItemById(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Entity with id: %d not found", itemId)));
+
+        return modelMapper.map(item, ItemDto.class);
     }
 
     @Override

@@ -25,8 +25,8 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public Response<ItemDto> getById(@PathVariable Long id) {
-        Item item = itemService.getById(id);
-        return new Response<>(modelMapper.map(item, ItemDto.class));
+        ItemDto item = itemService.getItemById(id);
+        return new Response<>(item);
     }
 
     @PostMapping

@@ -9,4 +9,5 @@ import java.util.List;
 public interface IItemService extends IGenericService<Item, Long> {
 
     List<ItemDto> getByCategoryId(Long categoryId);
+    ItemDto getItemById(Long id);
 }
